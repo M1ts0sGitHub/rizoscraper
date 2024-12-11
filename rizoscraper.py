@@ -64,12 +64,7 @@ def main():
         value=date.today(),
         min_value=datetime(2020, 1, 1),  # Set a reasonable minimum date
         max_value=date.today()  # Prevent future dates
-    )
-    
-    # Convert selected date to the required format
-    # formatted_date = selected_date.strftime("%d/%m/%Y")
-    
-    
+    )        
    
     for url in urls:
         try:
