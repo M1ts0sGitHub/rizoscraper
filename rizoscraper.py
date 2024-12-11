@@ -36,6 +36,18 @@ def scrape_website(url):
     return text
 
 def main():
+    st.title('Rizoscraper')
+    st.write("Welcome to our site! We leverage the power of Python to bring you the latest news articles from Rizospastis.gr. Our custom scraper, built with BeautifulSoup and requests, efficiently gathers specific articles from Rizospastis.gr. Using Streamlit, we present this curated content in a user-friendly and interactive format. Stay informed with our quick, daily, and streamlined news feed!")
+    st.text("")
+    
+    # Add a date picker
+    selected_date = st.date_input(
+        "Select a date",
+        value=date.today(),
+        min_value=datetime(2020, 1, 1),  # Set a reasonable minimum date
+        max_value=date.today()  # Prevent future dates
+    )        
+   
     # URLs list with the selected date
     formatted_date = selected_date.strftime("%d/%m/%Y")
     urls = [(f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
@@ -53,19 +65,6 @@ def main():
             (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9244", "Δαχτυλικά Αποτυπώματα"),
             (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")]
 
-
-    st.title('Rizoscraper')
-    st.write("Welcome to our site! We leverage the power of Python to bring you the latest news articles from Rizospastis.gr. Our custom scraper, built with BeautifulSoup and requests, efficiently gathers specific articles from Rizospastis.gr. Using Streamlit, we present this curated content in a user-friendly and interactive format. Stay informed with our quick, daily, and streamlined news feed!")
-    st.text("")
-    
-    # Add a date picker
-    selected_date = st.date_input(
-        "Select a date",
-        value=date.today(),
-        min_value=datetime(2020, 1, 1),  # Set a reasonable minimum date
-        max_value=date.today()  # Prevent future dates
-    )        
-   
     for url in urls:
         try:
             title, article = scrape_website(url[0])
