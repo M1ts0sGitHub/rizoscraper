@@ -36,42 +36,21 @@ def scrape_website(url):
     return text
 
 def main():
-<<<<<<< HEAD
-        # URLs list with the selected date
-=======
-    st.title('Rizoscraper')
-    st.write("Welcome to our site! We leverage the power of Python to bring you the latest news articles from Rizospastis.gr. Our custom scraper, built with BeautifulSoup and requests, efficiently gathers specific articles from Rizospastis.gr. Using Streamlit, we present this curated content in a user-friendly and interactive format. Stay informed with our quick, daily, and streamlined news feed!")
-    
-    # Add a date picker
-    selected_date = st.date_input(
-        "Select a date",
-        value=date.today(),
-        min_value=datetime(2020, 1, 1),  # Set a reasonable minimum date
-        max_value=date.today()  # Prevent future dates
-    )
-    
-    # Convert selected date to the required format
-    formatted_date = selected_date.strftime("%d/%m/%Y")
-    
-    st.text("")
-    
     # URLs list with the selected date
->>>>>>> origin/main
-    urls = [
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7389", "Σαν Σήμερα"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7401", "Η 'Αποψη μας"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7124", "Αποκαλυπτικά"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=662", "Επιστήμη"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9046", "Επιστήμη"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8968", "Πολιτισμός"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=8609", "Κινηματογράφος"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8966","Βιβλίο"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8403","Πόλεμος"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9924", "Σφήνες"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=521", "Πατριδογνωμόνιο"),
-        (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9244", "Δαχτυλικά Αποτυπώματα"),
-        (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")
+    urls = [(f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7389", "Σαν Σήμερα"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7401", "Η 'Αποψη μας"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7124", "Αποκαλυπτικά"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=662", "Επιστήμη"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9046", "Επιστήμη"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8968", "Πολιτισμός"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=8609", "Κινηματογράφος"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8966","Βιβλίο"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8403","Πόλεμος"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9924", "Σφήνες"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=521", "Πατριδογνωμόνιο"),
+            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9244", "Δαχτυλικά Αποτυπώματα"),
+            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")]
 
 
     st.title('Rizoscraper')
