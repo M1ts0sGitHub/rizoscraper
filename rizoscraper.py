@@ -37,6 +37,7 @@ def scrape_website(url):
 
 def main():
     # URLs list with the selected date
+    formatted_date = selected_date.strftime("%d/%m/%Y")
     urls = [(f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
             (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7389", "Σαν Σήμερα"),
             (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7401", "Η 'Αποψη μας"),
