@@ -51,7 +51,6 @@ def main():
     formatted_date = selected_date.strftime("%d/%m/%Y")
     
     st.text("")
-    st.header(formatted_date)
     
     # URLs list with the selected date
     urls = [
