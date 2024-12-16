@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 def fetch_html(url):
     """Fetch the HTML content of the given URL."""
@@ -80,7 +80,8 @@ def main():
             st.warning(f"Could not fetch article from {url[0]}: {str(e)}")
     
     if not_valid_day == True:
-        selected_date -= 1
+        delta_days += 1
+        selected_date -= datetime.timedelta(days=delta_days)
         formatted_date = selected_date.strftime("%d/%m/%Y")
 
 if __name__ == "__main__":
