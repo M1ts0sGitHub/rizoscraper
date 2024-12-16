@@ -48,41 +48,43 @@ def main():
         max_value=date.today()  # Prevent future dates
     )        
    
-    # URLs list with the selected date
-    formatted_date = selected_date.strftime("%d/%m/%Y")
-    urls = [(f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7389", "Σαν Σήμερα"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7401", "Η 'Αποψη μας"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7124", "Αποκαλυπτικά"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=662", "Επιστήμη"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9046", "Επιστήμη"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8968", "Πολιτισμός"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=8609", "Κινηματογράφος"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8966","Βιβλίο"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8403","Πόλεμος"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9924", "Σφήνες"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=521", "Πατριδογνωμόνιο"),
-            (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9244", "Δαχτυλικά Αποτυπώματα"),
-            (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")]
+    delta_days = 0
+    not_valid_day = True
 
-    for url in urls:
-        not_valid_day = True
-        try:
-            title, article = scrape_website(url[0])
-            if article:
-                with st.expander(url[1]):
-                    not_valid_day = False
-                    st.write(title)
-                    st.markdown(f'<div style="text-align: justify;">{article}</div>', unsafe_allow_html=True)
-                    st.text("")
-                    st.markdown(f'<p style="text-align: right;">Διάβασε το άρθρο στον <a href="{url[0]}">Ριζοσπάστη</a></p>', unsafe_allow_html=True)
-        except Exception as e:
-            st.warning(f"Could not fetch article from {url[0]}: {str(e)}")
-    
-    if not_valid_day == True:
-        delta_days += 1
-        selected_date -= datetime.timedelta(days=delta_days)
+    while not_valid_day:
         formatted_date = selected_date.strftime("%d/%m/%Y")
+        urls = [(f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=161", "Από μέρα σε μέρα"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7389", "Σαν Σήμερα"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7401", "Η 'Αποψη μας"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=7124", "Αποκαλυπτικά"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=662", "Επιστήμη"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9046", "Επιστήμη"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8968", "Πολιτισμός"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=8609", "Κινηματογράφος"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8966","Βιβλίο"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=8403","Πόλεμος"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9924", "Σφήνες"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=521", "Πατριδογνωμόνιο"),
+                (f"https://www.rizospastis.gr/columnStory.do?publDate={formatted_date}&columnId=9244", "Δαχτυλικά Αποτυπώματα"),
+                (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")]
+
+        for url in urls:
+            try:
+                title, article = scrape_website(url[0])
+                if article:
+                    with st.expander(url[1]):
+                        not_valid_day = False
+                        st.write(title)
+                        st.markdown(f'<div style="text-align: justify;">{article}</div>', unsafe_allow_html=True)
+                        st.text("")
+                        st.markdown(f'<p style="text-align: right;">Διάβασε το άρθρο στον <a href="{url[0]}">Ριζοσπάστη</a></p>', unsafe_allow_html=True)
+            except Exception as e:
+                st.warning(f"Could not fetch article from {url[0]}: {str(e)}")
+        
+        if not_valid_day:
+            delta_days += 1
+            selected_date -= timedelta(days=delta_days)
+            st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
