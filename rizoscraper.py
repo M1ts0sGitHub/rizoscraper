@@ -84,7 +84,6 @@ def main():
         if not_valid_day:
             delta_days += 1
             selected_date -= timedelta(days=1)
-            st.experimental_rerun()  # Rerun the script to update the date input
 
 if __name__ == "__main__":
     main()
