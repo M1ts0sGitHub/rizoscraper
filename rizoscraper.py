@@ -81,6 +81,7 @@ def main():
     
     if not_valid_day == True:
         selected_date -= 1
+        formatted_date = selected_date.strftime("%d/%m/%Y")
 
 if __name__ == "__main__":
     main()
