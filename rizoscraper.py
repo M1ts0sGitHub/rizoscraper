@@ -83,8 +83,7 @@ def main():
         
         if not_valid_day:
             delta_days += 1
-            selected_date -= timedelta(days=delta_days)
-            st.experimental_rerun()
+            selected_date -= timedelta(days=1)
 
 if __name__ == "__main__":
     main()
