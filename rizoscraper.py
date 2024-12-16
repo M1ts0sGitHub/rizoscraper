@@ -66,16 +66,21 @@ def main():
             (f"https://www.rizospastis.gr/columnPage.do?publDate={formatted_date}&columnId=9502", "Παιδί και Οικογένεια")]
 
     for url in urls:
+        not_valid_day = True
         try:
             title, article = scrape_website(url[0])
             if article:
                 with st.expander(url[1]):
+                    not_valid_day = False
                     st.write(title)
                     st.markdown(f'<div style="text-align: justify;">{article}</div>', unsafe_allow_html=True)
                     st.text("")
                     st.markdown(f'<p style="text-align: right;">Διάβασε το άρθρο στον <a href="{url[0]}">Ριζοσπάστη</a></p>', unsafe_allow_html=True)
         except Exception as e:
             st.warning(f"Could not fetch article from {url[0]}: {str(e)}")
+    
+    if not_valid_day == True:
+        selected_date -= 1
 
 if __name__ == "__main__":
     main()
